@@ -15,7 +15,7 @@ data.forEach((ufoSeen) => {
   
   var button = d3.select("#filter-btn");
 
-  var inputField = d3.select("#form");
+  var form = d3.select("#form");
 
   button.on("click", runEnter);
   form.on("submit", runEnter);
@@ -30,5 +30,18 @@ data.forEach((ufoSeen) => {
   
     // Get the value property of the input element
     var inputValue = inputForm.property("value");
+
+    var filteredData = tableData.filter(ufo => ufo.datetime === inputValue);
+
+    tbody.html("");
+
+    filteredData.forEach((dateSeen) => {
+        var row = tbody.append("tr");
+        Object.entries(dateSeen).forEach(value => {
+          var cell = row.append("td");
+          cell.text(value);
+        });
+      });
+
   }
   
