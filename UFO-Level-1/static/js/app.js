@@ -31,17 +31,29 @@ data.forEach((ufoSeen) => {
     // Get the value property of the input element
     var inputValue = inputForm.property("value");
 
-    var filteredData = tableData.filter(ufo => ufo.datetime === inputValue);
+    if (inputValue === "") {
+        var filteredData = tableData;
+    }
+    else {
+        var filteredData = tableData.filter(ufo => ufo.datetime === inputValue);
+    }
 
     tbody.html("");
 
-    filteredData.forEach((dateSeen) => {
+    if (filteredData.length === 0) {
         var row = tbody.append("tr");
-        Object.values(dateSeen).forEach(value => {
-          var cell = row.append("td");
-          cell.text(value);
-        });
-      });
+        var cell = row.append("td");
+        cell.text(`No sightings found for ${inputValue}`)
+    }
+    else {
+        filteredData.forEach((dateSeen) => {
+            var row = tbody.append("tr");
+            Object.values(dateSeen).forEach(value => {
+              var cell = row.append("td");
+              cell.text(value);
+            });
+          });    
+    }
 
   }
   
