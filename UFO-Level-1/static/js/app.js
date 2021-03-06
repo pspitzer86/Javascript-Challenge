@@ -7,7 +7,7 @@ var tbody = d3.select("tbody");
 
 data.forEach((ufoSeen) => {
     var row = tbody.append("tr");
-    Object.entries(ufoSeen).forEach(([key, value]) => {
+    Object.entries(ufoSeen).forEach(value => {
       var cell = row.append("td");
       cell.text(value);
     });
