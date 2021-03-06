@@ -46,7 +46,7 @@ data.forEach((ufoSeen) => {
         var td = d3.select("td");
 
         td.attr("colspan", "7");
-        cell.text(`No sightings reported`)
+        cell.text(`No sightings reported`);
     }
     else {
         filteredData.forEach((dateSeen) => {
@@ -55,8 +55,11 @@ data.forEach((ufoSeen) => {
               var cell = row.append("td");
               cell.text(value);
             });
-          });    
+          });
+
     }
+
+    inputForm.value("");
 
   }
   
