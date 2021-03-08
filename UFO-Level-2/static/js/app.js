@@ -22,55 +22,24 @@ data.forEach((ufoSeen) => {
     // Prevent the page from refreshing
     d3.event.preventDefault();
   
-    // Select the input element and get the raw HTML node, and get the value property of the input element
-    var inputDate = d3.select("#datetime");
-    var inputDvalue = inputDate.property("value");
+    var filterData = tableData;
 
-    if (inputDvalue === "") {
-      inputDvalue = "/*/"
+    var colList = ["datetime", "city", "state", "country", "shape"];
+
+    for (var i = 0; i < colList.length; i++) {
+      var inputCol = d3.select("#" + colList[i]);
+
+      var inputValue = inputCol.property("value");
+
+      if (inputValue != "") {
+        filterData = filterData.filter(ufo => ufo[colList[i]] === inputValue);
+        inputCol.property("value", "");
+      }
     }
-
-    // Select the input element and get the raw HTML node, and get the value property of the input element
-    var inputCity = d3.select("#city");
-    var inputCvalue = inputCity.property("value");
-
-    if (inputCvalue === "") {
-      inputCvalue = "/*/"
-    }   
-
-    // Select the input element and get the raw HTML node, and get the value property of the input element
-    var inputState = d3.select("#state");
-    var inputSvalue = inputState.property("value");
-
-    if (inputSvalue === "") {
-      inputSvalue = "/*/"
-    }        
-
-    // Select the input element and get the raw HTML node, and get the value property of the input element
-    var inputCountry = d3.select("#country");
-    var inputCOvalue = inputCountry.property("value");
-
-    if (inputCOvalue === "") {
-      inputCOvalue = "/*/"
-    }
-    // Select the input element and get the raw HTML node, and get the value property of the input element
-    var inputShape = d3.select("#shape");
-    var inputSvalue = inputShape.property("value");
-
-    if (inputSvalue === "") {
-      inputSvalue = "/*/"
-    }
-
-    var filteredData = tableData.filter(ufo => ufo.datetime.match(inputDvalue) &&
-                                               ufo.city.match(inputCvalue) &&
-                                               ufo.state.match(inputSvalue) &&
-                                               ufo.country.match(inputCOvalue) &&
-                                               ufo.shape.match(inputSvalue));
-  
 
     tbody.html("");
 
-    if (filteredData.length === 0) {
+    if (filterData.length === 0) {
         var row = tbody.append("tr");
         var cell = row.append("td");
         var td = d3.select("td");
@@ -79,16 +48,13 @@ data.forEach((ufoSeen) => {
         cell.text(`No sightings reported`);
     }
     else {
-        filteredData.forEach((dateSeen) => {
+        filterData.forEach((dateSeen) => {
             var row = tbody.append("tr");
             Object.values(dateSeen).forEach(value => {
               var cell = row.append("td");
               cell.text(value);
             });
           });
-        
-    inputForm.property("value", "");
-
     }
 
   }
