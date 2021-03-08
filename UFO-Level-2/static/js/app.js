@@ -32,7 +32,7 @@ data.forEach((ufoSeen) => {
       var inputValue = inputCol.property("value");
 
       if (inputValue != "") {
-        filterData = filterData.filter(ufo => ufo[colList[i]] === inputValue);
+        filterData = filterData.filter(ufo => ufo[colList[i]].toLowerCase() === inputValue.toLowerCase());
         inputCol.property("value", "");
       }
     }
