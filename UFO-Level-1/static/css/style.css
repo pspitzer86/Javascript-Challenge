@@ -77,6 +77,10 @@ select {
   text-align: left;
 }
 
+.none-found {
+  text-align: center;
+}
+
 #table-area th:first-child,
 #table-area th:nth-child(2),
 #table-area th:nth-child(6) {

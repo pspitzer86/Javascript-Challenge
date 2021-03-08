@@ -46,6 +46,7 @@ data.forEach((ufoSeen) => {
         var td = d3.select("td");
 
         td.attr("colspan", "7");
+        td.attr("class", "none-found");
         cell.text(`No sightings reported`);
     }
     else {
