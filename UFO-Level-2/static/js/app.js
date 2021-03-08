@@ -59,14 +59,14 @@ data.forEach((ufoSeen) => {
 
     if (inputSvalue === "") {
       inputSvalue = "/*/"
-    }    
+    }
 
-    if (inputValue === "") {
-        var filteredData = tableData;
-    }
-    else {
-        var filteredData = tableData.filter(ufo => ufo.datetime === inputDvalue);
-    }
+    var filteredData = tableData.filter(ufo => ufo.datetime.match(inputDvalue) &&
+                                               ufo.city.match(inputCvalue) &&
+                                               ufo.state.match(inputSvalue) &&
+                                               ufo.country.match(inputCOvalue) &&
+                                               ufo.shape.match(inputSvalue));
+  
 
     tbody.html("");
 
